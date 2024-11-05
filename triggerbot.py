@@ -1,4 +1,5 @@
 import time
+import random
 from pynput.mouse import Controller as MouseController, Button
 from pynput.keyboard import Controller as KeyboardController
 from PIL import ImageGrab
@@ -31,9 +32,9 @@ def monitor_pixel():
         if shift_on():
             current_color = get_center_pixel_color()
             if current_color != previous_color:
+                time.sleep(random.uniform(0.1, 0.3)) # Random delay to act like a human
                 mouse.click(Button.left)
                 previous_color = current_color
-            #Adjust the delay to act like a human
             time.sleep(1)  # Adjust the delay as needed
 
 # Start the monitoring in a try-except to handle keyboard interrupts gracefully
