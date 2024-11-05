@@ -17,19 +17,22 @@ def get_center_pixel_color():
     return center_pixel
 
 # Function to check if Caps Lock is active
-def is_caps_lock_on():
+def caps_lock_on():
     return CGEventSourceKeyState(kCGEventSourceStateHIDSystemState, 0x39)  # 0x39 is the key code for Caps Lock
 
 # Function to check if Shift is active
 def shift_on():
     return CGEventSourceKeyState(kCGEventSourceStateHIDSystemState, 0x10)  # 0x10 is the key code for Shift
 
+def alt_on():
+    return CGEventSourceKeyState(kCGEventSourceStateHIDSystemState, 0x64)  # 0x64 is the key code for Alt
+
 # Main function to monitor pixel color and click if color changes
 def monitor_pixel():
     previous_color = get_center_pixel_color()
     while True:
         # Only activate if Caps Lock is on
-        if shift_on():
+        if alt_on():
             current_color = get_center_pixel_color()
             if current_color != previous_color:
                 time.sleep(random.uniform(0.1, 0.3)) # Random delay to act like a human
